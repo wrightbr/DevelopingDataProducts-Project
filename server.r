@@ -15,7 +15,7 @@ library(ggplot2)
 data <- airquality[,c("Ozone","Solar.R","Wind","Temp")]
 Date.time <- paste(airquality$Day, airquality$Month, c(rep("1974",length(airquality$Day))))
 Date.time <- strptime(Date.time, "%d %m %Y")
-data$DateTime <- as.character(strptime(Date.time, "%Y-%m-%d", tz="America/Los_Angeles"))
+data$DateTime <- as.Date(as.character(strptime(Date.time, "%Y-%m-%d", tz="America/Los_Angeles")))
 
 
 shinyServer(
@@ -77,7 +77,8 @@ shinyServer(
   
     output$Plot2 <- renderPlot({
       environment<-environment() 
-      ggplot(aes(data[,input$varx], data[,input$vary]),data = data, environment=environment)+geom_point() 
+      ggplot(aes(data[,input$varx], data[,input$vary]),data = data, environment=environment)+geom_point()  
+
       
     })
 
