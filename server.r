@@ -18,25 +18,19 @@ shinyServer(
         
     observe({ 
       if (input$browse == 0) return()
-      updateTextInput(session, "path", value = file.choose())
+      updateTextInput(session, "path", value = choose.dir())
     })
-      
-    observe({ 
-      if (input$browse == 0) return()
-      updateTextInput(session, "path", value = file.choose())
-    })
-    
-    
+
     
     observe({
-      if (input$upload == 0)
+      if (input$download == 0)
         return()
-      dataset <- read.table(input$path, header=TRUE, sep="\t", skipNul=TRUE)
-      dataset$Month <- as.character(dataset$Name)
-      dataset$Day <- as.character(dataset$DueDate)
-      dataset$Year <- as.character(dataset$EstimatedTimeRequired)
-      dataset$Temp_F <- as.character(dataset$Hyperlink)
-      data_to_print$values <- dataset 
+      dir_0 <- getwd()
+      setwd(input$path)
+
+      
+      write.table(data[, input$show_vars, drop=FALSE], paste(input$file_name,input$ext,sep="."), sep=as.character(input$separ))
+      setwd(dir_0)
     })
     
     observe({

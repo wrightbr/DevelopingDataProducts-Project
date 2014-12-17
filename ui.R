@@ -135,7 +135,19 @@ shinyUI(
                          sidebarLayout(
                            sidebarPanel(
                              checkboxGroupInput('show_vars','Columns in airquality dataset to show:',
-                                                names(data), selected = names(data))
+                                                names(data), selected = names(data)),
+                             hr(),
+                             h4("Download this datatable"),
+                             textInput("path", "Choose the destination for your data file:"),
+                             actionButton("browse", "Browse"),
+                             textInput("file_name", "Name the file:"),
+                             br(),
+                             selectInput("ext", "Choose file extension:", 
+                                         choices=c("txt","csv","xls","xlsx", "dta")),
+                             selectInput("separ", "Choose separator character:", 
+                                         choices=c("\t",",",";",".","-")),
+                             helpText("First character is tab."),
+                             actionButton("download", "Download")
 
                              ),
                            
@@ -145,14 +157,14 @@ shinyUI(
                           
                         )
     
-                  ),
+                  )
      
-                tabPanel("Input File", 
-                         h4("Choose your data file"),
-                         textInput("path", "File"),
-                         actionButton("browse", "Browse"),
-                         actionButton("upload", "Upload")),
-                         dataTableOutput('table')
+#                 tabPanel("Download Data File", 
+#                          h4("Choose the destination of your data file:"),
+#                          textInput("path", "Path:"),
+#                          actionButton("browse", "Browse"),
+#                          actionButton("download", "Download")
+#                 )
     )
 
 )
