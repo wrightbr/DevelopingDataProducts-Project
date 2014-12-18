@@ -1,5 +1,0 @@
-"Name";"DueDate";"EstimatedTimeRequired";"Hyperlink";
-"Quiz1";"08/12/2014";"00:30";"https://class.coursera.org/devdataprod-016/quiz";
-"Quiz2";"15/12/2014";"00:30";"https://class.coursera.org/devdataprod-016/quiz";
-"Quiz3";"22/12/2014";"00:30";"https://class.coursera.org/devdataprod-016/quiz";
-"Project1";"22/12/2014";"04:00";"https://class.coursera.org/devdataprod-016/human_grading/view/courses/973764/assessments/5";
