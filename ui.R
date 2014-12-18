@@ -12,7 +12,7 @@ data$DateTime <- as.Date(as.character(strptime(Date.time, "%Y-%m-%d", tz="Americ
 data <- data[complete.cases(data),]
 
 shinyUI(
-    navbarPage("AirQuality Data Analysis App v6.0",
+    navbarPage("AirQuality Data Analysis App v8.0",
                 tabPanel("About the App",
                   wellPanel(
                     h4("Welcome!"),
@@ -93,7 +93,19 @@ shinyUI(
                tabPanel("How to use this App",
                         wellPanel(
                             h4("How to use the Plot tab functions:"),
-                            helpText("A")
+                            helpText("As you can see on the Plot tab, first you can select the variables to plot. By default
+                                   an 'Ozone' vs 'DateTime' will be shown. By using these selectboxes you can access to the 
+                                   variables stored at 'airquality' dataset (previously downloaded automatically by using the
+                                   datasets R library) and select the variables you want to plot. Under them you can see 4
+                                   checkboxes which allow you to plot the measures points, the line they create between each 
+                                   measure-point, add a fit line for all measures of range selected and add the area all points
+                                   create."),
+                            helpText("At the right of this panel the plot is shown, it refreshes the new information
+                                   you selected at the checkbox just in a second. Notice labels on both axes are
+                                   displayed according to selected variables. This is also implemented on the 'server.R'."),
+                            helpText("Below these a big panel with 4 subpanels is shown. These subpanels will allow
+                                   the user to control some parameters of the data displayed on the plot:
+                                   ")
                           ),
                         wellPanel(
                           h4("How to use the Table tab functions:"),
@@ -284,16 +296,61 @@ shinyUI(
                   ),
                
                tabPanel("Reference articles and code",
-                        wellPanel(
+                    tabsetPanel(    
+                        tabPanel("Basic",
+                          wellPanel(
+                          
                           h4("Github Repo:"),
                           helpText("The main code and files you can find on my Github Repository for this project (see link below):"),
-                          helpText(a("AirQuality Data Analisys App 6.0 Github Repo:",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/"))
-                        ),
-                        wellPanel(
-                          h4("How to use the Table tab functions:"),
-                          helpText("B")
+                          helpText(a("AirQuality Data Analisys App v8.0 Github Repository",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/")),
+                          helpText("There you'll find both the 'server.R' and the 'ui.R' files. You can run the App with these files, just following the
+                                   steps shown at Shiny Tutorial Lesson 1 (see link below):"),
+                          helpText(a("Shiny Ref: How to run this App with R on your computer",href="http://shiny.rstudio.com/tutorial/lesson1/")),
+                          
+                          h4("Basic Notions:"),
+                          helpText("There are a few things to remind before explaining detailed code: the whole App is structured with a 'navbarPage'. 
+                                   Basically this Shiny interface widget creates the top navigation bar shown at the top of it.
+                                   The title is defined and then each one of the tabs you want to create on this bar
+                                   has to be inserted using the function 'tabPanel'. Then, if you look up the code at 'ui.R' file 
+                                   you'll find a basic (huge) structure with a 'navBarPage' with as many 'tabPage' inside it as 
+                                   tabs in the top bar of the App. See Shiny reference below:"),
+                          helpText(a("Shiny Ref: navbarPage",href="http://shiny.rstudio.com/reference/shiny/latest/navbarPage.html")),
+                          helpText(a("Shiny Ref: Application Layour Guide(tabPage explained on it)",href="http://shiny.rstudio.com/articles/layout-guide.html")),
+                          helpText("Another function I used a lot on this app too is 'wellPanel'. Do you see the 'gray-shadowed rectangle'
+                                   under this text? Well, that's a 'wellPanel'. Rather than letting this (ugly) blank default background
+                                   I find this function more interesting and stylish."),
+                          helpText(a("Shiny Ref: wellPanel", href="http://shiny.rstudio.com/reference/shiny/latest/wellPanel.html")),
+                          helpText("Before digging into the whole code there's this last thing to talk about: User Interface. So Shiny is an html based
+                                   App creator (or sort of), and that makes it possible to use a bunch of html parameters for improving your App.
+                                   If you don't know anything about HTML I'm refering to bold titles, headers, tabs, separators, lists, and all this stuff
+                                   I used all the time on this App. See Shiny reference below:"),
+                          helpText(a("Shiny Ref: User-interface", href="http://shiny.rstudio.com/tutorial/lesson2/")),
+                          
+                          h4("Control Widgets"),
+                          helpText("Control widgets are some interface tools that allow the user to communicate with the App.
+                                   They can be buttons, text input boxes, checkboxes, radio buttons and so on. 
+                                   They make your App a lot more interesting and valuable. This project required to use 
+                                   some of these widgets so you'll see them everywhere. With them you can insert values and
+                                   variables to your main R function (which is stored and specified at 'server.R' file, and 
+                                   which will do the hard calculation job) and a lot of different things. The control widgets
+                                   are called at the 'ui.R' file (user interface), and then its value can be got at the 
+                                   'server.R' value by simply using the 'input$' prefix (followed by the widget ID). See the 
+                                   Shiny reference and documentation about control widgets below:"),
+                          helpText(a("Shiny Ref: Control widgets Tutorial",href="http://shiny.rstudio.com/tutorial/lesson3/")),
+                          helpText(a("Shiny Ref: Widget Gallery", href="http://shiny.rstudio.com/gallery/widget-gallery.html"))
                         )
-                        
+                      ),
+                      tabPanel("Code",
+                        wellPanel(
+                          h4("server.R"),
+                          helpText("Find it here:"),
+                          helpText(a("server.R",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/blob/master/server.r")),
+                          h4("ui.R:"),
+                          helpText("Find it here:"),
+                          helpText(a("ui.R",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/blob/master/ui.r"))
+                        )
+                      )
+                    )
                )
      
 
