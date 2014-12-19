@@ -5,7 +5,7 @@ library(ggplot2)
 require(shinysky)
 library(scales)
 
-Plotfunction <- function(varx, vary, slider_x, slider_y, points_checkbox, line_checkbox, color_lines, area_checkbox, color_fill_area, color_line_area, fit_checkbox, color_fill_fit, color_line_fit, session){
+Plotfunction <- function(varx, vary, slider_x, slider_y, points_checkbox, color_points, line_checkbox, color_lines, area_checkbox, color_fill_area, color_line_area, fit_checkbox, color_fill_fit, color_line_fit, session){
   
   environment<-environment()   
   
@@ -114,7 +114,7 @@ shinyServer(
       setwd(input$path_img)
       png(as.character(paste(input$file_name_img,"png",sep="."), width = 480, height = 720))
       print(Plotfunction(input$varx, input$vary, input$slider_x, input$slider_y, 
-                   input$points_checkbox, input$line_checkbox, input$color_lines, 
+                   input$points_checkbox, input$color_points, input$line_checkbox, input$color_lines, 
                    input$area_checkbox, input$color_fill_area, input$color_line_area, 
                    input$fit_checkbox, input$color_fill_fit, input$color_line_fit, session))
       dev.off()
@@ -151,7 +151,7 @@ shinyServer(
     output$MainPlot <- renderPlot({
       
       Plotfunction(input$varx, input$vary, input$slider_x, input$slider_y, 
-                 input$points_checkbox, input$line_checkbox, input$color_lines, 
+                 input$points_checkbox, input$color_points, input$line_checkbox, input$color_lines, 
                  input$area_checkbox, input$color_fill_area, input$color_line_area, 
                  input$fit_checkbox, input$color_fill_fit, input$color_line_fit, session)
    

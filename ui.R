@@ -12,7 +12,7 @@ data$DateTime <- as.Date(as.character(strptime(Date.time, "%Y-%m-%d", tz="Americ
 data <- data[complete.cases(data),]
 
 shinyUI(
-    navbarPage("AirQuality Data Analysis App v10.0",
+    navbarPage("AirQuality Data Analysis App v11.0",
                 tabPanel("About the App",
                   wellPanel(
                     h4("Welcome!"),
@@ -122,7 +122,7 @@ shinyUI(
                               tags$li(tags$b("X and Y Axis Zoom on Plot:"), "Zoom In the X and/or Y variables with these sliders. Two text boxes will show
                                       the maximum and minimum values now shown (after zooming) on the plot, for X and Y variables, so you can
                                       get a better image of data plotted (i.e., to see which days or months in 1974 had days on which Temperature was
-                                      over 80ºF)."),
+                                      over 80F)."),
                               tags$li(tags$b("Save this plot as png:"), "Just type your local destination folder (i.e, C:/MyUser/) or click the 'Browse' button
                                       and choose the path you want to save your plot, name it on the text box under it, and click the 'Save' button 
                                       to download a png image of your plot, customized by you with all the colors, elements and variables
@@ -240,6 +240,17 @@ shinyUI(
                            
                            column(3, wellPanel(
                                   tabsetPanel(
+                                    tabPanel("Points",
+                                             jscolorInput("color_points"),
+                                             helpText("Configure data points color.")
+                                             
+                                    ),
+                                    
+                                    tabPanel("Line",
+                                             jscolorInput("color_lines"),
+                                             helpText("Configure data-values line color.")
+                                    ),
+                                    
                                     tabPanel("Fit",
                                               h5("Line Color"),
                                               jscolorInput("color_line_fit"),
@@ -256,18 +267,9 @@ shinyUI(
                                              h5("Fill Color"),
                                              jscolorInput("color_fill_area"),
                                              helpText("Configure Data area plot fill color.")
-                                      ),
+                                      )
                                     
-                                    tabPanel("Points",
-                                             jscolorInput("color_points"),
-                                             helpText("Configure data points color.")
-                                      
-                                      ),
                                     
-                                    tabPanel("Line",
-                                             jscolorInput("color_lines"),
-                                             helpText("Configure data-values line color.")
-                                             )
   
                                 )
                                   
@@ -355,7 +357,7 @@ shinyUI(
                           
                           h4("Github Repo:"),
                           helpText("The main code and files you can find on my Github Repository for this project (see link below):"),
-                          helpText(a("AirQuality Data Analisys App v10.0 Github Repository",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/")),
+                          helpText(a("AirQuality Data Analisys App v11.0 Github Repository",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/")),
                           helpText("There you'll find both the 'server.R' and the 'ui.R' files. You can run the App with these files, just following the
                                    steps shown at Shiny Tutorial Lesson 1 (see link below):"),
                           helpText(a("Shiny Ref: How to run this App with R on your computer",href="http://shiny.rstudio.com/tutorial/lesson1/")),
