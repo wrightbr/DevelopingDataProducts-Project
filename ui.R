@@ -12,7 +12,7 @@ data$DateTime <- as.Date(as.character(strptime(Date.time, "%Y-%m-%d", tz="Americ
 data <- data[complete.cases(data),]
 
 shinyUI(
-    navbarPage("AirQuality Data Analysis App v8.0",
+    navbarPage("AirQuality Data Analysis App v10.0",
                 tabPanel("About the App",
                   wellPanel(
                     h4("Welcome!"),
@@ -355,7 +355,7 @@ shinyUI(
                           
                           h4("Github Repo:"),
                           helpText("The main code and files you can find on my Github Repository for this project (see link below):"),
-                          helpText(a("AirQuality Data Analisys App v8.0 Github Repository",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/")),
+                          helpText(a("AirQuality Data Analisys App v10.0 Github Repository",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/")),
                           helpText("There you'll find both the 'server.R' and the 'ui.R' files. You can run the App with these files, just following the
                                    steps shown at Shiny Tutorial Lesson 1 (see link below):"),
                           helpText(a("Shiny Ref: How to run this App with R on your computer",href="http://shiny.rstudio.com/tutorial/lesson1/")),
