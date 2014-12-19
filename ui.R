@@ -91,8 +91,17 @@ shinyUI(
                 ),
                
                tabPanel("How to use this App",
+                       
                         wellPanel(
-                            h4("How to use the Plot tab functions:"),
+                          h4("Navigate the App:"),
+                          helpText("This App is structured with a navigation bar panel with 5 tabs: About the App (basic info),
+                                   How to use this App (the current tab), Table (to see the data), Plot (to plot of the data) and
+                                   Reference sources and code (References and external sources for Shiny developers). Just go to the
+                                   Plot or the data Tab to see what this App really can do if you just don't enjoy reading!")
+                          ),
+                        
+                        wellPanel(
+                            h4("How to use the Plot tab :"),
                             helpText("As you can see on the Plot tab, first you can select the variables to plot. By default
                                    an 'Ozone' vs 'DateTime' will be shown. By using these selectboxes you can access to the 
                                    variables stored at 'airquality' dataset (previously downloaded automatically by using the
@@ -104,13 +113,58 @@ shinyUI(
                                    you selected at the checkbox just in a second. Notice labels on both axes are
                                    displayed according to selected variables. This is also implemented on the 'server.R'."),
                             helpText("Below these a big panel with 4 subpanels is shown. These subpanels will allow
-                                   the user to control some parameters of the data displayed on the plot:
-                                   ")
+                                   the user to control some parameters of the data displayed on the plot (from left to right):"),
+                            tags$ul("",
+                              tags$li(tags$b("Data Information:"), "See the maximum, minimum and average value for X and Y selected and plotted variables"),
+                              tags$li(tags$b("Color Section:"), "Select the line and/or the fill color/s for each element plotted, such as, the fit line, the data area, data points or lines;
+                                      simply click on the desired tab element and again click on the rectangle with the HEX characters for the RGB color,
+                                      then just choose your desired color on the pannel that popped out."),
+                              tags$li(tags$b("X and Y Axis Zoom on Plot:"), "Zoom In the X and/or Y variables with these sliders. Two text boxes will show
+                                      the maximum and minimum values now shown (after zooming) on the plot, for X and Y variables, so you can
+                                      get a better image of data plotted (i.e., to see which days or months in 1974 had days on which Temperature was
+                                      over 80ºF)."),
+                              tags$li(tags$b("Save this plot as png:"), "Just type your local destination folder (i.e, C:/MyUser/) or click the 'Browse' button
+                                      and choose the path you want to save your plot, name it on the text box under it, and click the 'Save' button 
+                                      to download a png image of your plot, customized by you with all the colors, elements and variables
+                                      you adjusted on the previous steps.")
+                              )
                           ),
                         wellPanel(
                           h4("How to use the Table tab functions:"),
-                          helpText("B")
+                          helpText("The Table tab should be really intuitive and easy to use. Two main columns are shown on it:"),
+                          h5("Customize Data and Saving Options (Left Panel):"),
+                          tags$ul("",
+                                  tags$li(tags$b("Select variables to display:"), "This part of the left column allows you to
+                                          select the data variables you want to display on the datatable. By default all of them are chosen,
+                                          but you can easily select or deselect any of them by clicking on the checkbox with the variable
+                                          you want to modify."),
+                                  tags$li(tags$b("Download this datatable"),"On the other hand, this section lets you save the datatable in
+                                          your computer by simply choosing the destination folder (typing its path into the text box or clicking
+                                          on the 'browse' button), naming the output file, choosing its extension (txt, csv, xls or xlsx for excel,
+                                          or dta), choosing the separator character (important if you work on R or other similar
+                                          software) and clicking the 'Download' button. Once it's all done you should see your custom datatable
+                                          (just the same datatable currently displayed on your browser) on your computer.")
+
+                          ),
+                          
+                          h5("DataTable (Right Panel):"),
+                          tags$ul("",
+                                  tags$li(tags$b("The table:"), "You might see the datatable, all filled up, with a bunch of values
+                                          but only with the variables which checkbox is selected on the left panel. This is a basic 
+                                          shiny datatable, which reference you can see",
+                                          a("here.", href="http://shiny.rstudio.com/articles/datatables.html")
+                                  ),
+                                          
+                                  tags$li(tags$b("Basic datatable controls:"), "As any other basic shiny datatable (see previous
+                                          reference) this datatable comes with some basic controls such as: selecting the number
+                                          of records (Values or rows) displayed per page, sorting the data by any variable up to down
+                                          or viceversa values, or directly searching for any specified value in ALL variables (search
+                                          box on the right-top), or at any single variable (by using the separate search text boxes
+                                          down)."
+                                  )
                           )
+
+                        )
                   
                ),
                
@@ -252,7 +306,6 @@ shinyUI(
                            )),
                            
                            column(3,wellPanel(
-                             helpText("Hey"),
                              h4("Save this plot as png"),
                              textInput("path_img", "Choose the destination folder:"),
                              actionButton("browse_img", "Browse"),
@@ -295,7 +348,7 @@ shinyUI(
     
                   ),
                
-               tabPanel("Reference articles and code",
+               tabPanel("Reference sources and code",
                     tabsetPanel(    
                         tabPanel("Basic",
                           wellPanel(
@@ -340,16 +393,45 @@ shinyUI(
                           helpText(a("Shiny Ref: Widget Gallery", href="http://shiny.rstudio.com/gallery/widget-gallery.html"))
                         )
                       ),
-                      tabPanel("Code",
+                      tabPanel("Main libraries used",
                         wellPanel(
-                          h4("server.R"),
-                          helpText("Find it here:"),
-                          helpText(a("server.R",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/blob/master/server.r")),
-                          h4("ui.R:"),
-                          helpText("Find it here:"),
-                          helpText(a("ui.R",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/blob/master/ui.r"))
+                          h4("datasets"),
+                          helpText("Necessary package to get the airquality dataset."),
+                          helpText(a("Ext. Ref: datasets",href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/airquality.html")),
+                          h4("shiny"),
+                          helpText("Necessary package to create and run Shiny Apps."),
+                          helpText(a("Shiny Ref: Get started with Shiny",href="http://shiny.rstudio.com/tutorial/lesson1/")),
+                          h4("shiny"),
+                          helpText("Necessary package to create and run Shiny Apps."),
+                          helpText(a("Shiny Ref: Get started with Shiny",href="http://shiny.rstudio.com/tutorial/lesson1/")),
+                          h4("ggplot2"),
+                          helpText("Package used to create better-looking plots."),
+                          helpText(a("R Ref: package ggplot2",href="http://cran.r-project.org/web/packages/ggplot2/index.html")),
+                          h4("scales"),
+                          helpText("Package used to create and modify scales and legends in ggplot2 plots easily."),
+                          helpText(a("R Ref: scales package",href="http://cran.r-project.org/web/packages/scales/index.html")),
+                          h4("foreign"),
+                          helpText("Package used to import/export data (upload, download files, etc.)."),
+                          helpText(a("R Ref: Package foreign",href="http://cran.r-project.org/web/packages/foreign/index.html")),
+                          h4("shinysky"),
+                          helpText("Package used to perform color actions in shiny (like selecting colors, etc.)."),
+                          helpText(a("Author's GitHub Repo",href="https://github.com/AnalytixWare/ShinySky"))
                         )
+                      ),
+                                          
+                      
+                      tabPanel("Code",
+                               wellPanel(
+                                 h4("server.R"),
+                                 helpText(a("server.R",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/blob/master/server.r")),
+                                 br(),
+                                 h4("ui.R:"),
+                                 helpText(a("ui.R",href="https://github.com/manuelblancovalentin/DevelopingDataProducts-Project/blob/master/ui.r"))
+                               )
                       )
+                      
+                      
+                      
                     )
                )
      
